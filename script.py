@@ -1,4 +1,4 @@
-#version 0.0.2
+version = '0.1'
 debug = False #Debug will skip entering a location, and sets location to New York City
 #TODO
 #Add rate limiting
@@ -120,7 +120,9 @@ for i in range (0,14):
     print('The weather ' + (forecast["properties"]["periods"][i]["name"]) + ' will be' )
     print((forecast["properties"]["periods"][i]["detailedForecast"]) + '\n')
 
-#print(forecast["properties"]["periods"][0]["name"])
-#is the time in which the detailed forecase is describing
-#print(forecast["properties"]["periods"][0]["detailedForecast"])
-#is the actual forecast. maybe create a dict to make easier?
+print('Relaunch the app to see another place!')
+print('App version ' + version)
+while debug == False or debug == True: 
+  if debug == True:
+    print('Debug mode is on.')
+  #infinite loop here because I don't know what to do after this
