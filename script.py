@@ -104,7 +104,7 @@ if In_US == -1:
     sys.exit('Relaunch the app to search again')
 
 else:
-    print('Displaying Weather for ' + loc.address)
+    print('Displaying Weather for ' + loc.address + '\n')
 
 Lat = str(loc.latitude)
 Long = str(loc.longitude) # Coordinates
