@@ -1,4 +1,4 @@
-version = '0.1.2'
+version = '0.1.3'
 debug = False #Debug will skip entering a location, and sets location to New York City
 #TODO
 #Add rate limiting
@@ -45,13 +45,14 @@ except ModuleNotFoundError:#in the case that the nominatim or requests module is
     if install_yes_or_no.lower() == 'y':#.lower() turns capital Y into lowercase y
       #this allows me to check both Y and y
       clr()
-      print('Installing GeoPy...')
+      print('Installing GeoPy... ')
       subprocess.check_call([sys.executable, "-m", "pip", "install", "geopy"])
       from geopy.geocoders import Nominatim #init package
-      print('Successfully installed GeoPy!')
+      print('Successfully installed GeoPy!(1/2)')
       print('Installing Requests...')
       subprocess.check_call([sys.executable, "-m", "pip", "install", "requests"])
-      print('Successfully installed Requests!')
+      import requests
+      print('Successfully installed Requests!(2/2)')
       clr()
       givenAnswer = True
       print('Modules has been successfully installed! Loading weather app...')
@@ -60,13 +61,12 @@ except ModuleNotFoundError:#in the case that the nominatim or requests module is
     elif install_yes_or_no.lower() == 'n':
       givenAnswer == True
       clr()
-      print('Sorry, but GeoPy is required to use the Weather app.')
+      print('Sorry, but GeoPy and Requests are required to use the Weather app.')
       sys.exit('App has been exited.')
       
     else:
-
       print('Your response ("' + install_yes_or_no + '") was not one of the expected responses: Y or n')
-
+  
 
 def scrape(URL): #Scrapes NWS to turn JSON to Dict
     # The 'requests' and 'sys' module must be imported
