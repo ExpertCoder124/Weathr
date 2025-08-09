@@ -1,4 +1,4 @@
-version = '0.1'
+version = '0.1.2'
 debug = False #Debug will skip entering a location, and sets location to New York City
 #TODO
 #Add rate limiting
@@ -12,7 +12,7 @@ debug = False #Debug will skip entering a location, and sets location to New Yor
 #find a way to check if place requested even exists, not just exists outside of USA
 
 
-import requests #for scraping NWS API
+
 import os #for the clr function
 import sys #for stopping program in case of error
 import subprocess #for installing pip apps
@@ -29,26 +29,32 @@ clr()
 
 try:
   from geopy.geocoders import Nominatim #for finding coords of location
+  import requests #for scraping NWS API
 
-except ModuleNotFoundError:#in the case that the nominatim module isn't installed
+except ModuleNotFoundError:#in the case that the nominatim or requests module isn't installed
   #auto installs module
-  print('The pip module "GeoPy" is required to run the Weather app.')
-  print('GeoPy is used to convert locations into machine-readable GPS coordinates')
+  print('The pip module "GeoPy" and/or "Requests" is required to run the Weather app.')
+  print('GeoPy is used to convert locations into machine-readable GPS coordinates.')
   print('The GeoPy module cannot find or track your current location.')
- 
+  print('The Requests module is required to access weather data')
+
   givenAnswer = False 
   while givenAnswer == False: #checks to see if user actually gave answer
-    install_yes_or_no = input('Would you like to install GeoPy in this Python virtual enviroment? (Y/n) ')
+    install_yes_or_no = input('Install modules GeoPy and/or Requests in this Python virtual enviroment? (Y/n) ')
   
     if install_yes_or_no.lower() == 'y':#.lower() turns capital Y into lowercase y
       #this allows me to check both Y and y
       clr()
-      print('Installing app...')
+      print('Installing GeoPy...')
       subprocess.check_call([sys.executable, "-m", "pip", "install", "geopy"])
       from geopy.geocoders import Nominatim #init package
+      print('Successfully installed GeoPy!')
+      print('Installing Requests...')
+      subprocess.check_call([sys.executable, "-m", "pip", "install", "requests"])
+      print('Successfully installed Requests!')
       clr()
       givenAnswer = True
-      print('App has been successfully installed! Loading weather app...')
+      print('Modules has been successfully installed! Loading weather app...')
       time.sleep(3)
 
     elif install_yes_or_no.lower() == 'n':
